@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: test-and-cleanup
+spec:
+  steps:
+    - name: install
+      image: python:3.9
+      script: |
+        pip install pytest
+
+    - name: test
+      image: python:3.9
+      script: |
+        pytest
+
+    - name: cleanup
+      image: alpine
+      script: |
+        echo "Cleaning up workspace"
